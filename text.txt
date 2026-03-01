@@ -1,0 +1,10 @@
+Доброго дня.
+
+Загалом початок непоганий, але класи недописано.
+
+1. Phone дозволяє зберігати невалідний телефон 12345678abcde в атрибуті value   Done
+
+2. Класс Record не має метод remove_phone.  Done
+3. Класс Record не має метод edit_phone.    Yet to be checked
+4. Класс Record не має метод find_phone.    Yet to be checked
+5. Класс AddressBook в коді не оголошено.   Done
