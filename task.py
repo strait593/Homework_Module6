@@ -76,6 +76,9 @@ class Addressbook(UserDict):
 
     def display_records(self) -> str:
         return "\n".join(str(record) for record in self.data.values())
+    
+    def __str__(self):
+        return str(self.display_records())
 
 """
 Use case for the code
@@ -83,15 +86,15 @@ Use case for the code
 
 if __name__ == "__main__":
     book = Addressbook()
-
+    #Checking the functionality of Record class
     dimon_record = Record("Dimon")
     dimon_record.add_phone("1231231234")
     dimon_record.add_phone("3213213210")
-    dimon_record.add_phone("2131231231")
+    dimon_record.edit_phone("1231231234", "5906064014")
+    dimon_record.remove_phone("5906064014")
     book.add_record(dimon_record)
 
     jane_record = Record("Jane")
     jane_record.add_phone("1112223333")
     book.add_record(jane_record)
-
-    print(book.display_records())
+    print(book)
