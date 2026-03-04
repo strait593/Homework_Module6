@@ -1,10 +1,12 @@
-Доброго дня.
+1. Цей пункт не виправлено.✔
 
-Загалом початок непоганий, але класи недописано.
+5. AddressBook написано з помилкою. Виправьте.✔
 
-1. Phone дозволяє зберігати невалідний телефон 12345678abcde в атрибуті value   Done
+6. Якщо номеру телефона не існує то метод find_phone класу Record повинен повернути None✔
 
-2. Класс Record не має метод remove_phone.  Done
-3. Класс Record не має метод edit_phone.    Yet to be checked
-4. Класс Record не має метод find_phone.    Yet to be checked
-5. Класс AddressBook в коді не оголошено.   Done
+7. Метод edit_phone класу Record видалив існуючий номер при спробі заміни на  невалідний. Повинен викинути ValueError✔
+
+8. Уберіть цю перевірку✔
+        if value.isdigit() == False:
+            raise InvalidCharacter("Invalid character entered.")
+із метода add_phone . Валідація номера телефона має відбуватись тільки в класі Phone, при створенні об'єкта.

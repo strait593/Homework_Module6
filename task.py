@@ -33,9 +33,11 @@ class Record:
         self.phones: list[Phone] = []
 
     def add_phone(self, value: str):
-        self.phones.append(Phone(value))
-        if value.isdigit() == False:
-            raise InvalidCharacter("Invalid character entered.")
+        for char in value:
+            if char.isalpha():
+                raise InvalidCharacter("Letters can`t be a part of a phone number.")
+        else:
+            self.phones.append(Phone(value))
 
     def remove_phone(self, value: str):
         for phone in self.phones:
@@ -56,13 +58,14 @@ class Record:
         for phone in self.phones:
             if phone.value == value:
                 return phone
-        return "Such phone number does not exist."
+            
+        return None
 
     def __str__(self) -> str:
         phones_str = "; ".join(p.value for p in self.phones)
         return f"Contact name: {self.name.value}, phones: {phones_str}"
     
-class Addressbook(UserDict):
+class AddressBook(UserDict):
     # Handles the addition of contacts, searches based on name and removal of records
     def add_record(self, record: "Record"):
         self.data[record.name.value] = record
@@ -85,13 +88,14 @@ Use case for the code
 """
 
 if __name__ == "__main__":
-    book = Addressbook()
+    book = AddressBook()
     #Checking the functionality of Record class
     dimon_record = Record("Dimon")
     dimon_record.add_phone("1231231234")
-    dimon_record.add_phone("3213213210")
+    dimon_record.add_phone("3213213210")    #corrected, now, if i`ll try to add a letter, script will raise  an InvalidCharacter error
     dimon_record.edit_phone("1231231234", "5906064014")
     dimon_record.remove_phone("5906064014")
+    print(dimon_record.find_phone("1111111111"))    #corrected
     book.add_record(dimon_record)
 
     jane_record = Record("Jane")
