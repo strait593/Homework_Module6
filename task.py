@@ -19,12 +19,13 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, phone):
-        if len(str(phone)) < 10:
-            raise InsufficientCharactersError("The phone number is too short.")
+        if (str(phone)) != 10:
+            raise InsufficientCharactersError("The phone number should be exactly 10 digits long.")
         super().__init__(phone)
 
-        if str(phone).isalpha():
-            raise InvalidCharacter("Invalid character entered.")
+        for char in phone:
+            if char.isalpha():
+                raise InvalidCharacter("Phone number cannnor contain letters or special symbols")
 
 class Record:
     # Handles the addition, removal and editing of phone numbers
@@ -49,8 +50,8 @@ class Record:
         phone_for_editing = self.find_phone(old_phone)
 
         if phone_for_editing:
-            self.remove_phone(old_phone)
             self.add_phone(updated_phone)
+            self.remove_phone(old_phone)
         else:
             raise ValueError(f"Phone number {old_phone} does not exist.")
     
@@ -92,13 +93,20 @@ if __name__ == "__main__":
     #Checking the functionality of Record class
     dimon_record = Record("Dimon")
     dimon_record.add_phone("1231231234")
-    dimon_record.add_phone("3213213210")    #corrected, now, if i`ll try to add a letter, script will raise  an InvalidCharacter error
+    dimon_record.add_phone("12312312341")
+    dimon_record.add_phone("3213213210aaa")    #corrected, now, if i`ll try to add a letter, script will raise  an InvalidCharacter error
+    dimon_record.edit_phone("1231231234", "5906064014aaa")
     dimon_record.edit_phone("1231231234", "5906064014")
     dimon_record.remove_phone("5906064014")
-    print(dimon_record.find_phone("1111111111"))    #corrected
+    print(dimon_record.find_phone("1231231234"))    #corrected
+    print(dimon_record.find_phone("1111111111"))
     book.add_record(dimon_record)
 
     jane_record = Record("Jane")
     jane_record.add_phone("1112223333")
     book.add_record(jane_record)
     print(book)
+
+    #Виправив edit_phone, тепер ця функція не додає неправильні номери
+    #А також телефонні номери повинні мати рівно 10 цифер
+    
