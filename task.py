@@ -19,13 +19,11 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, phone):
-        if (str(phone)) != 10:
+        if len(str(phone)) != 10:
             raise InsufficientCharactersError("The phone number should be exactly 10 digits long.")
         super().__init__(phone)
-
-        for char in phone:
-            if char.isalpha():
-                raise InvalidCharacter("Phone number cannnor contain letters or special symbols")
+        if not phone.isdigit():
+                raise ValueError("Phone number cannnot contain letters or special symbols")
 
 class Record:
     # Handles the addition, removal and editing of phone numbers
@@ -109,4 +107,4 @@ if __name__ == "__main__":
 
     #Виправив edit_phone, тепер ця функція не додає неправильні номери
     #А також телефонні номери повинні мати рівно 10 цифер
-    
+     
